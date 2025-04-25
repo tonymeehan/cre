@@ -1,0 +1,49 @@
+rules:
+- cre:
+    id: CRE-2025-0046
+    severity: 2
+    title: NATS Permissions Violation Detected
+    category: authorization-problem
+    author: Laurent Sibilla
+    description: | 
+      The NATS server has emitted an **Permission Violation** log entry, meaning
+      a client attempted to publish or subscribe to a subject for which it lacks
+      permission.
+    cause: |
+      * The client lacks publish/subscribe permissions for the subject it is
+      using.
+    tags:
+      - nats
+      - security
+      - authorization
+    mitigation: |
+      - **Verify credentials** – confirm the `.creds`, NKey, or JWT files in
+         the client deployment are correct.
+      - **Check permissions** – in the server configuration (`authorization {}`)  
+         or the account JWT, ensure the user/account is allowed to perform the
+         attempted PUB/SUB operation.
+      - **Rotate or re-issue keys/JWTs** if credentials are compromised or
+         expired, and update all clients.
+      - **Audit repeated failures** – turn on verbose server logs temporarily
+         and review for malicious activity or configuration drift.
+    references: 
+      - https://docs.nats.io/running-a-nats-service/configuration/securing_nats/authorization
+    applications:
+      - name: nats
+        version: ">= 2.x"
+    impact: |
+      Authorization failures block affected clients from sending or receiving
+      messages, which can lead to back-pressure, message loss, or broader
+      service outages in systems that rely on NATS for critical messaging.
+    impactScore: 4
+    mitigationScore: 4
+  metadata:
+    kind: rules
+    id: JunHdvJUOT2lhlxsWQ8f6w
+    gen: 1
+  rule:
+    set:
+      event:
+        source: cre.logs.nats
+      match:
+        - regex: "nats: permissions violation: Permissions Violation for (Publish|Subscription) to .*"

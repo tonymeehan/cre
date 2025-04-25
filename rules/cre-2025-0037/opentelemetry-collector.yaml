@@ -29,7 +29,7 @@ rules:
       - https://github.com/open-telemetry/opentelemetry-collector/issues/9891
     applications:
       - name: opentelemetry-collector-contrib
-        version: v0.115.0
+        version: "0.115.0"
         containerName: otel-collector
     impact: Full crash of collector during metric translation with malformed attributes
     impactScore: 8

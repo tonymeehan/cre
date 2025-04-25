@@ -30,7 +30,7 @@ rules:
       - https://github.com/open-telemetry/opentelemetry-collector/issues?q=context+deadline+exceeded+502
     applications:
       - name: opentelemetry-collector
-        version: '>=0.80.0'
+        version: ">= 0.80.0"
         containerName: otel-collector
     impact: telemetry delay or export failure due to network or backend errors
     impactScore: 5

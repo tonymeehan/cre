@@ -30,7 +30,7 @@ rules:
       - https://opendev.org/openstack/neutron/commit/267631e8fb35af4d9d96c70c6e6ddba25256f195
     applications:
       - name: neutron
-        version: <= 20.2.0
+        version: "<= 20.2.0"
         containerName: neutron-server
     impact: network provisioning failure for VMs
     impactScore: 7

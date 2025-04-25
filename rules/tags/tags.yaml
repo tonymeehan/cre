@@ -333,4 +333,18 @@ tags:
   - name: payload
     displayName: Payload
     description: Problems related to message payloads, such as malformed data or size limit violations
-    
+  - name: nats
+    displayName: NATS
+    description: Problems related to NATS, such as authorization failures, message loss, or configuration issues
+  - name: authorization
+    displayName: Authorization
+    description: Problems related to authorization, such as missing or invalid credentials, or misconfigurations
+  - name: nginx
+    displayName: Nginx
+    description: Problems related to Nginx, such as weak ciphers, configuration errors, or performance issues
+  - name: tls
+    displayName: TLS
+    description: Problems related to TLS, such as weak ciphers, configuration errors, or performance issues
+  - name: weak-ciphers
+    displayName: Weak Ciphers
+    description: Problems related to weak ciphers, such as RC4, DES, or MD5

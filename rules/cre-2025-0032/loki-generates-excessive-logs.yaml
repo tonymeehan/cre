@@ -32,7 +32,7 @@ rules:
       - https://github.com/grafana/loki/issues/12714#issuecomment-2110724290
     applications:
       - name: loki
-        version: <3.0.0
+        version: "< 3.0.0"
         containerName: loki
     impact: cache connection error, noisy logs
     impactScore: 2

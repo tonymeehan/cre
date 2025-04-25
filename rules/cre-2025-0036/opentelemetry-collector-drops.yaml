@@ -28,7 +28,7 @@ rules:
       - https://github.com/open-telemetry/opentelemetry-collector/issues/8010
     applications:
       - name: opentelemetry-collector
-        version: '>=0.80.0'
+        version: ">= 0.80.0"
         containerName: otel-collector
     impact: telemetry loss due to rejected payloads from exporter destination
     impactScore: 6

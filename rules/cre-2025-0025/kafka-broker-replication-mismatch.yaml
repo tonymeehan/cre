@@ -24,9 +24,9 @@ rules:
         - https://github.com/strimzi/strimzi-kafka-operator/issues/990
       applications:
         - name: Kafka
-          version: 3.x
+          version: "3.x"
         - name: Kafka
-          version: 4.x
+          version: "4.x"
     metadata:
       kind: rules
       id: LikPvDPTX5kEKiR3EoBEM7

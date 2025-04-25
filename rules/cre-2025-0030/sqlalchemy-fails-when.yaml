@@ -27,7 +27,7 @@ rules:
       - https://docs.sqlalchemy.org/en/20/core/engines.html#escaping-special-characters-such-as-signs-in-passwords
     applications:
       - name: sqlalchemy
-        version: < 2.0.30
+        version: "< 2.0.30"
         containerName: app
     impact: Service startup failure
     impactScore: 6

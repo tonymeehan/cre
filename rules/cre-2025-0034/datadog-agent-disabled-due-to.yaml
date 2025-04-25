@@ -26,7 +26,7 @@ rules:
       - https://docs.datadoghq.com/getting_started/site/
     applications:
       - name: datadog-agent
-        version: '*'
+        version: "*"
         containerName: datadog
     impact: no metrics, logs, or events exported to Datadog
     impactScore: 6

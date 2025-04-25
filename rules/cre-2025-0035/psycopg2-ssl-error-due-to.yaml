@@ -29,7 +29,7 @@ rules:
       - https://www.postgresql.org/message-id/flat/CAMsr+YEY0JzwW9aEiXtTG1EXw9uOsT0X5aNq27gk3BNyULmGPw@mail.gmail.com
     applications:
       - name: django
-        version: '>=3.2'
+        version: ">= 3.2"
         containerName: web
     impact: Failed database queries and healthchecks due to broken SSL state
     impactScore: 7

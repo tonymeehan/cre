@@ -26,7 +26,7 @@ rules:
     - https://github.com/memcached/memcached/wiki/FAQ#im-getting-out-of-memory-errors
     applications:
     - name: loki
-      version: '*'
+      version: "*"
       containerName: loki
     impact: degraded query performance or cache miss behavior in Loki due to failed cache insertions
     impactScore: 5

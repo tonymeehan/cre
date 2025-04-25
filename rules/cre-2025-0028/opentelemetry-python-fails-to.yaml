@@ -24,7 +24,7 @@ rules:
       - https://github.com/python/cpython/issues/118944
     applications:
       - name: opentelemetry-python
-        version: < 1.13.0
+        version: "< 1.13.0"
         containerName: otel-python
     impact: Degraded volume lifecycle (e.g., stuck PVC)
     impactScore: 6

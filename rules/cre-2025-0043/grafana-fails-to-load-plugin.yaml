@@ -28,7 +28,7 @@ rules:
       - https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#plugins
     applications:
       - name: grafana
-        version: '>= 8.0.0'
+        version: ">= 8.0.0"
         containerName: grafana
     impact: plugin is blocked and unavailable in dashboards or panels
     impactScore: 4

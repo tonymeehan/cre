@@ -24,7 +24,7 @@ rules:
       - https://github.com/grafana/helm-charts/issues/1550#issuecomment-1180365429
     applications:
       - name: loki
-        version: < 2.8.0
+        version: "< 2.8.0"
         containerName: loki
     impact: service startup failure
     impactScore: 6

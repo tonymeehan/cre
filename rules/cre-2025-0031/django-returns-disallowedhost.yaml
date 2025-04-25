@@ -34,7 +34,7 @@ rules:
       - https://docs.djangoproject.com/en/stable/topics/security/#host-header-validation
     applications:
       - name: django
-        version: '>= 1.10'
+        version: ">= 1.10"
         containerName: web
     impact: Errors
     impactScore: 5

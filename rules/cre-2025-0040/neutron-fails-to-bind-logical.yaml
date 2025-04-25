@@ -28,7 +28,7 @@ rules:
       - https://opendev.org/openstack/neutron/commit/45fd94db9a343c4dbdbcc6e989d77d674ed040a9
     applications:
     - name: neutron
-      version: <= 22.0.0
+      version: "<= 22.0.0"
       containerName: neutron-server
     impact: failed load balancer provisioning and port binding due to race condition in logical switch lookups
     impactScore: 6

@@ -24,11 +24,11 @@ rules:
         - https://github.com/kedacore/keda/issues/4207
       applications:
         - name: KEDA Operator
-          version: 2.9.2
+          version: "2.9.2"
           imageUrl: ghcr.io/kedacore/keda:2.9.2
           containerName: keda-operator
         - name: KEDA Operator
-          version: 2.13.0
+          version: "2.13.0"
           imageUrl: ghcr.io/kedacore/keda:2.13.1
           containerName: keda-operator
     metadata:

@@ -30,8 +30,9 @@ rules:
       - https://github.com/redis/redis-py/pull/3015
     applications:
       - name: redis-py
-        version: ' >= 5.0.0, < 5.1.0'
-        containerName: app
+        version: ">= 5.0.0"
+      - name: redis-py
+        version: "< 5.1.0"
     impact: process/thread-local Redis context loss leading to runtime exceptions
     impactScore: 5
     mitigationScore: 4

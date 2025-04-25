@@ -27,7 +27,7 @@ rules:
       - https://github.com/open-telemetry/opentelemetry-collector/issues/8217
     applications:
       - name: opentelemetry-collector
-        version: '>= 0.60.0'
+        version: ">= 0.60.0"
         containerName: otel-collector
     impact: Loss of telemetry due to backpressure from collector
     impactScore: 7

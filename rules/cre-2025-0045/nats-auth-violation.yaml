@@ -1,0 +1,54 @@
+rules:
+- cre:
+    id: CRE-2025-0045
+    severity: 2
+    title: NATS Authorization Failure Detected
+    category: authorization-problem
+    author: Laurent Sibilla
+    description: | 
+      The NATS server has emitted an **Authorization Violation** log entry, meaning a client attempted to connect, publish, subscribe, or perform another operation for which it lacks permission. Intermittent violations often point to misconfiguration or start-up chaos. However, sustained or widespread violations can signal credential expiry or missing secrets.
+    cause: |
+      * Client credentials (username/password, NKey, or JWT) are missing,
+        invalid, revoked, or expired.  
+      * The client is connecting to the wrong account or lacks publish/subscribe
+        permissions for the subject it is using.  
+      * Clock skew between client and server invalidates JWT `iat`/`exp` claims.  
+      * TLS / mTLS mapping failure prevents the certificate from matching an
+        authorized user.  
+      * Recent credential rotation not yet reflected in running deployments
+        (e.g., stale Kubernetes Secret or mis-configured CI pipeline). 
+    tags:
+      - nats
+      - security
+      - authorization
+    mitigation: |
+      - **Verify credentials** – confirm the `.creds`, NKey, or JWT files in
+         the client deployment are correct and unexpired.  
+      - **Check permissions** – in the server configuration (`authorization {}`)  
+         or the account JWT, ensure the user/account is allowed to perform the
+         attempted PUB/SUB/CONNECT operation.  
+      - **Rotate or re-issue keys/JWTs** if credentials are compromised or
+         expired, and update all clients.  
+      - **Synchronize clocks** on clients and servers via NTP to avoid JWT
+         time-skew errors.  
+      - **Audit repeated failures** – turn on verbose server logs temporarily
+         and review for malicious activity or configuration drift. 
+    references: 
+      - https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro
+    applications:
+      - name: nats
+        version: ">= 2.x"
+    impact: |
+      Authorization failures block affected clients from sending or receiving messages, which can lead to back-pressure, message loss, or broader service outages in systems that rely on NATS for critical messaging.
+    impactScore: 4
+    mitigationScore: 4
+  metadata:
+    kind: rules
+    id: MeSYLTdBeDi1kroH6QidFq
+    gen: 1
+  rule:
+    set:
+      event:
+        source: cre.logs.nats
+      match:
+        - value: "nats: Authorization Violation"

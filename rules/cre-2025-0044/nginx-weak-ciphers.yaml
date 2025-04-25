@@ -1,0 +1,52 @@
+rules:
+- cre:
+    id: CRE-2025-0044
+    severity: 2
+    title: NGINX Config Uses Insecure TLS Ciphers
+    category: insecure-configuration
+    author: Wayne Major
+    description: |
+      Detects NGINX configuration files that advertise obsolete and cryptographically weak ciphers (RC4-MD5, RC4-SHA, DES-CBC3-SHA). These ciphers are vulnerable to several well-known attacks—including BEAST, BAR-Mitzvah, Lucky-13, and statistical biases in RC4—placing any client–server communication at risk of interception or tampering.
+    cause: |
+      * Legacy defaults copied forward from older configurations
+      * Down-level load-balancer / reverse-proxy templates
+      * Incomplete adoption of modern SSL hardening guidelines (e.g. Mozilla SSL Config Generator “modern” profile)
+    tags:
+      - nginx
+      - weak-ciphers
+      - security
+      - configuration
+      - tls
+      - known-issue
+    mitigation: |
+      - **Remove weak suites** from the `ssl_ciphers` directive (`ssl_ciphers HIGH:!aNULL:!MD5:!RC4:!3DES;`) or adopt a vetted baseline (Mozilla intermediate/modern).  
+      - **Enable TLS 1.2+** (`ssl_protocols TLSv1.2 TLSv1.3;`).  
+      - **Prefer forward secrecy**—include only ECDHE/DHE key-exchange suites.  
+      - **Test the endpoint** with tools such as SSL Labs or `testssl.sh` to verify no weak ciphers remain.  
+      - **Automate regression checks** within CI by linting rendered NGINX configs (e.g. `grep -E "(RC4|3DES)"`) or using OpenSSL to enumerate accepted suites (`openssl ciphers -v '...'`).  
+    references:
+      - https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_ciphers
+      - https://wiki.mozilla.org/Security/Server_Side_TLS
+      - https://datatracker.ietf.org/doc/html/rfc7465            # Prohibits RC4
+      - https://datatracker.ietf.org/doc/html/rfc8996            # Deprecates TLS 1.0/1.1
+      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2566  # Lucky-13
+    applications:
+      - name: nginx
+        version: "*"
+    impact: |
+      Weak ciphers allow attackers with passive or active network access to decrypt or manipulate HTTPS traffic, undermining confidentiality and integrity guarantees. In regulated environments (PCI-DSS, HIPAA, SOC 2) continued use can trigger compliance violations, audit findings, or outright service blocking by modern browsers and API clients.
+    impactScore: 9
+    mitigationScore: 1
+  metadata:
+    kind: rules
+    id: X323Umy1G2EFWkUCi8AcS9
+    gen: 1
+  rule:
+    set:
+      window: 1s
+      event:
+        source: cre.config.nginx
+      match:
+        - value: RC4-MD5
+        - value: RC4-SHA
+        - value: DES-CBC3-SHA

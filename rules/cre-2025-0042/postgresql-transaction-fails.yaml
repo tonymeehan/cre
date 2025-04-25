@@ -25,7 +25,7 @@ rules:
       - https://docs.djangoproject.com/en/stable/ref/models/querysets/#select-for-update
     applications:
       - name: django
-        version: '>= 3.0'
+        version: ">= 3.0"
         containerName: web
     impact: One or more transactions rolled back due to database lock contention
     impactScore: 7

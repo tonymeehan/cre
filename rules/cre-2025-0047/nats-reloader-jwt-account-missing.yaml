@@ -1,0 +1,40 @@
+rules:
+- cre:
+    id: CRE-2025-0047
+    severity: 2
+    title: NATS Account Resolver Failure
+    category: authentication-problem
+    author: Dylan Page
+    description: | 
+      The NATS server is unable to lookup the account JWT for a leafnode server.
+    cause: |
+      - The NATS server is unable to lookup the account JWT for a leafnode server because it is missing from the /data/resolver directory or the remote resolver is unreachable.
+    tags:
+      - nats
+      - security
+      - authentication
+    mitigation: |
+      - Enable debug logs in the NATS server
+      - Identify the account that is missing in the debug logs when the resolver fails to lookup the account JWT
+      - Review the /data/resolver directory on the NATS server for the missing account JWT
+      - If it is missing, a new account JWT needs to be created for the leaf node server
+    references: 
+      - https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/jwt/resolver
+      - https://github.com/nats-io/nats-server/pull/3319
+    applications:
+      - name: nats
+        version: ">= 2.x"
+    impact: |
+      - The leafnode NATS server using the missing account will not be able to connect to the cluster.
+    impactScore: 5
+    mitigationScore: 6
+  metadata:
+    kind: rules
+    id: fLPpyQndsJWyD5RtsafWFn
+    gen: 1
+  rule:
+    set:
+      event:
+        source: cre.log.nats
+      match:
+        - "[WRN] Account fetch failed: account jwt not found"

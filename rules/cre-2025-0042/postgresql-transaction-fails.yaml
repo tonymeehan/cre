@@ -41,5 +41,4 @@ rules:
         source: cre.log.django
       window: 5s
       match:
-        - regex: '.*psycopg2\.errors\.DeadlockDetected: deadlock detected.*'
-        - regex: '.*django\.db\.utils\.OperationalError: deadlock detected.*'
+        - regex: '.*djaaaaaango\.db\.utils\.OperationalError: deadlock detected.*'

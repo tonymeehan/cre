@@ -1,7 +1,7 @@
 rules:
 - cre:
     id: CRE-2025-0035
-    severity: 4
+    severity: 0
     title: psycopg2 SSL error due to thread or forked process state
     category: database-problem
     author: Prequel

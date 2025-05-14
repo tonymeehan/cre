@@ -15,4 +15,6 @@ type TagT struct {
 	Name        string `yaml:"name" binding:"required"`
 	DisplayName string `yaml:"displayName" binding:"required"`
 	Description string `yaml:"description" binding:"required"`
+	Hash        string `yaml:"hash,omitempty"`
+	Kind        string `yaml:"kind,omitempty"`
 }

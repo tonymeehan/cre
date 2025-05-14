@@ -1,0 +1,55 @@
+rules:
+- cre:
+    id: CRE-2025-0050
+    severity: 3
+    title: NATS Payload Size Too Big
+    category: message-queue-problem
+    author: Prequel
+    description: |
+      The NATS server is configured to publish messages with payloads that may
+      exceed the recommended maximum of 8 MB (the server’s default hard limit
+      is 1 MB but it can be raised to 64 MB).  Large messages put disproportionate pressure on 
+      broker memory, network buffers, and client back-pressure mechanisms.
+      This warning signals NATS is at risk of degraded throughput, slow
+      consumers, and forced connection closures intended to protect cluster
+      stability.
+    cause: |
+      - The `max_payload` setting was increased (or left unbounded) in the
+        server configuration, allowing oversized publishes.
+      - Clients are batching or embedding large binary blobs (e.g., files,
+        images, or protocol-buffer frames) directly in message bodies instead
+        of using object storage or chunking.
+      - Producers lack safeguards to check server-advertised limits at
+        connection time, so later code changes silently begin sending bigger
+        payloads.
+    tags:
+      - nats
+    mitigation: |
+      - **Enforce tighter limits**: set `max_payload` to a value ≤ 8 MB (or
+         lower) in `nats-server.conf`; smaller limits force clients to chunk or
+         off-load large data.
+      - **Chunk or stream**: split large blobs into smaller messages that the
+         consumer reassembles, or publish to JetStream Object Store / external
+         storage and send only references.
+      - **Add client-side guards**: validate payload size before every
+         publish and reject or compress anything that would breach the limit.
+      - **Monitor log & metrics**: alert on the warning string and track
+         memory, pending bytes, and slow-consumer disconnect counts.
+    references: 
+      - https://docs.nats.io/reference/faq#is-there-a-message-size-limitation-in-nats
+    applications:
+      - name: nats
+        version: ">= 2.x"
+    impact: |
+    impactScore: 2
+    mitigationScore: 8
+  metadata:
+    kind: prequel
+    id: D3KSHtgWBbKcG3HYdQLU1s
+    gen: 1
+  rule:
+    set:
+      event:
+        source: cre.log.nats
+      match:
+        - value: "[WRN] Maximum payloads over 8.00 MB are generally discouraged and could lead to poor performance"

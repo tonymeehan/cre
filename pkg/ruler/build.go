@@ -71,14 +71,20 @@ func RunBuild(inPath, outPath, vers string) error {
 	return nil
 }
 
-func processTags(inPath string) (tagsT, error) {
+type tagDataT struct {
+	dupes tagsT
+	tSec  RuleIncludeT
+	cSec  RuleIncludeT
+}
+
+func processTags(inPath string) (*tagDataT, error) {
 	var (
-		tagsData          []byte
-		categoriesData    []byte
-		tagsSection       RuleIncludeT
-		categoriesSection RuleIncludeT
-		tags              = make(tagsT)
-		err               error
+		tagsData       []byte
+		categoriesData []byte
+		td             = &tagDataT{
+			dupes: make(tagsT),
+		}
+		err error
 	)
 
 	tagsData, err = os.ReadFile(filepath.Join(inPath, tagsDir, tagsYaml))
@@ -87,7 +93,7 @@ func processTags(inPath string) (tagsT, error) {
 		return nil, err
 	}
 
-	if err := yaml.Unmarshal(tagsData, &tagsSection); err != nil {
+	if err := yaml.Unmarshal(tagsData, &td.tSec); err != nil {
 		log.Error().Err(err).Msg("Fail unmarshal tags")
 		return nil, err
 	}
@@ -98,22 +104,22 @@ func processTags(inPath string) (tagsT, error) {
 		return nil, err
 	}
 
-	if err := yaml.Unmarshal(categoriesData, &categoriesSection); err != nil {
+	if err := yaml.Unmarshal(categoriesData, &td.cSec); err != nil {
 		log.Error().Err(err).Msg("Fail unmarshal categories")
 		return nil, err
 	}
 
-	if err := validateTagsFields(tagsSection, tags); err != nil {
+	if err := validateTagsFields(td.tSec, td.dupes); err != nil {
 		log.Error().Err(err).Str("file", filepath.Join(inPath, tagsDir, tagsYaml)).Msg("Fail validate tags")
 		return nil, err
 	}
 
-	if err := validateCategoriesFields(categoriesSection, tags); err != nil {
+	if err := validateCategoriesFields(td.cSec, td.dupes); err != nil {
 		log.Error().Err(err).Str("file", filepath.Join(inPath, tagsDir, catsYaml)).Msg("Fail validate categories")
 		return nil, err
 	}
 
-	return tags, nil
+	return td, nil
 }
 
 func processRules(path string, ruleDupes, termDupes dupesT, tags tagsT) (*parser.RulesT, error) {
@@ -201,17 +207,20 @@ func _build(vers, inPath, outPath, packageName string) error {
 		allTerms  = make(map[string]parser.ParseTermT)
 		ruleDupes = make(dupesT)
 		termDupes = make(dupesT)
-		tags      tagsT
+		td        *tagDataT
 		err       error
 	)
 
 	log.Info().Str("vers", vers).Str("outPath", outPath).Msg("Building")
 
-	if tags, err = processTags(inPath); err != nil {
+	if td, err = processTags(inPath); err != nil {
 		return err
 	}
 
-	log.Debug().Any("tags", tags).Msg("Tags")
+	log.Debug().
+		Int("tags", len(td.tSec.Tags)).
+		Int("categories", len(td.cSec.Categories)).
+		Msg("Tags")
 
 	cres, err := os.ReadDir(inPath)
 	if err != nil {
@@ -238,7 +247,7 @@ func _build(vers, inPath, outPath, packageName string) error {
 
 		log.Debug().Str("file", e.Name()).Msg("Processing target")
 
-		if r, err = processRules(filepath.Join(inPath, e.Name()), ruleDupes, termDupes, tags); err != nil {
+		if r, err = processRules(filepath.Join(inPath, e.Name()), ruleDupes, termDupes, td.dupes); err != nil {
 			log.Error().Err(err).Msg("Fail process rules")
 			return err
 		}
@@ -293,10 +302,11 @@ func compile(rules *parser.RulesT) error {
 
 	var (
 		tree *parser.TreeT
+		opts = make([]parser.ParseOptT, 0)
 		err  error
 	)
 
-	if tree, err = parser.ParseRules(rules); err != nil {
+	if tree, err = parser.ParseRules(rules, opts); err != nil {
 		return err
 	}
 
@@ -311,6 +321,7 @@ func compileCombinedDoc(data []byte) error {
 
 	var (
 		rules *parser.RulesT
+		opts  = make([]parser.ParseOptT, 0)
 		err   error
 	)
 
@@ -318,7 +329,7 @@ func compileCombinedDoc(data []byte) error {
 		return err
 	}
 
-	if _, err := parser.ParseRules(rules); err != nil {
+	if _, err := parser.ParseRules(rules, opts); err != nil {
 		return err
 	}
 
@@ -346,7 +357,6 @@ func makeFilename(name, vers string) string {
 }
 
 // Convert to document per section
-
 func generateDocument(rules map[string]parser.ParseRuleT, terms map[string]parser.ParseTermT) ([]byte, error) {
 
 	// Gather keys to produce consistent order output

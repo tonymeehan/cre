@@ -24,24 +24,6 @@ tags:
   - name: known-problem
     displayName: Known Problem
     description: This is a documented known problem with known mitigations
-  - name: cre-2023-0001
-    displayName: CRE-2023-0001
-    description: CRE-2023-0001 is a known problem with Kafka
-  - name: cre-2023-0004
-    displayName: CRE-2023-0004
-    description: CRE-2023-0004 is a known problem with Velero and Restic
-  - name: cre-2023-0005
-    displayName: CRE-2023-0005
-    description: CRE-2023-0005 is a known problem with Google Cloud SQL Proxy
-  - name: cre-2024-0006
-    displayName: CRE-2024-0006
-    description: CRE-2024-0006 is a known problem with Kafka Topic Operator
-  - name: cre-2024-0007
-    displayName: CRE-2024-0007
-    description: CRE-2024-0007 is a known problem with RabbitMQ Mnesia
-  - name: cre-2024-0010
-    displayName: CRE-2024-0010
-    description: CRE-2024-0010 is a known problem with Gunicorn
   - name: gunicorn
     displayName: Gunicorn
     description: Problems with Python Gunicorn
@@ -72,9 +54,6 @@ tags:
   - name: beta
     displayName: Beta
     description: Beta rules are experimental and may change in the future
-  - name: cre-2024-004
-    displayName: CRE-2024-004
-    description: CRE-2024-004 is a known problem with Amazon VPC CNI plugin
   - name: crash
     displayName: Crash
     description: Problems with applications crashing
@@ -96,9 +75,6 @@ tags:
   - name: misconfiguration
     displayName: Misconfiguration
     description: Problems with misconfigurations
-  - name: cre-2024-0016
-    displayName: CRE-2024-0016
-    description: CRE-2024-0016 is a known problem with Keda Operator
   - name: keda
     displayName: KEDA
     description: Problems with KEDA Operator

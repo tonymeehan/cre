@@ -1,7 +1,7 @@
 rules:
 - cre:
     id: CRE-2025-0042
-    severity: 4
+    severity: 0
     title: PostgreSQL transaction fails with deadlock detected error in psycopg2 and Django
     category: database-problem
     author: Prequel

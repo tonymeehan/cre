@@ -1,0 +1,14 @@
+[7] 2025/05/13 01:56:59.981822 [INF] Starting nats-server
+[7] 2025/05/13 01:56:59.981876 [INF]   Version:  2.10.11
+[7] 2025/05/13 01:56:59.981879 [INF]   Git:      [5fc6051]
+[7] 2025/05/13 01:56:59.981880 [INF]   Cluster:  prequel-nats-0
+[7] 2025/05/13 01:56:59.981882 [INF]   Name:     prequel-nats-0
+[7] 2025/05/13 01:56:59.981883 [INF]   ID:       NC6E4IBSFZ2SDQR3XYD3SAAD6OSINA2URH7E4SQOKQN2EC6PYF3JUFPD
+[7] 2025/05/13 01:56:59.981897 [INF] Using configuration file: /etc/nats-config/nats.conf
+[7] 2025/05/13 01:56:59.981906 [WRN] Maximum payloads over 8.00 MB are generally discouraged and could lead to poor performance
+[7] 2025/05/13 01:56:59.982540 [INF] Starting http monitor on 0.0.0.0:8222
+[7] 2025/05/13 01:56:59.983885 [INF] Listening for client connections on 0.0.0.0:4222
+[7] 2025/05/13 01:56:59.983893 [INF] TLS required for client connections
+[7] 2025/05/13 01:56:59.984032 [INF] Server is ready
+[7] 2025/05/13 01:57:00.091340 [INF] 3.20.40.248:7422 - lid:5 - Leafnode connection created for account: $G 
+[7] 2025/05/13 01:57:00.289842 [INF] 3.20.40.248:7422 - lid:5 - JetStream using domains: local "", remote ""

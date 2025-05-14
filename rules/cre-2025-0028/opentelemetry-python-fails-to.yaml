@@ -15,6 +15,7 @@ rules:
       - contextvars
       - async
       - observability
+      - public
     mitigation: |
       - Ensure that context tokens are detached in the same context they were created.
       - Use `contextlib.aclosing()` to manage asynchronous generators properly.

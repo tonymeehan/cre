@@ -26,6 +26,7 @@ rules:
       tags: 
         - known-problem
         - rabbitmq
+        - public
       mitigation: |
         - **Diagnose** – run `rabbitmq-diagnostics busy_dist_port` (3.13+) or inspect warnings to identify affected nodes.  
         - **Raise the buffer limit** – set `RABBITMQ_DISTRIBUTION_BUFFER_SIZE=512000` (≈ 512 MB) or pass `-zdbbl 512000` to the Erlang VM; restart the node.  Ensure the pod / host memory limit is increased accordingly (≥ 512 MB × node count).  

@@ -17,6 +17,7 @@ rules:
       - cache
       - known-issue
       - kubernetes
+      - public
     mitigation: | 
       - Ensure that the `memcached_client` configuration references the correct Kubernetes service **port name**.
       - Match the port name exactly as defined in your memcached service. 

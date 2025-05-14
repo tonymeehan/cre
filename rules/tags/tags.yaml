@@ -327,3 +327,6 @@ tags:
   - name: alloy
     displayName: Alloy
     description: Problems related to Grafana alloy, such as Loki fanout crashes, or entries too far behind.
+  - name: public
+    displayName: Public
+    description: Open source CREs contributed by the problem detection community

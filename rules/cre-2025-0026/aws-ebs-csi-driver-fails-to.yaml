@@ -14,6 +14,7 @@ rules:
       - csi
       - aws
       - storage 
+      - public
     mitigation: | 
       - Upgrade to aws-ebs-csi-driver v1.26.1 or later.
       - Avoid deleting PVCs or terminating pods immediately after volume provisioning.

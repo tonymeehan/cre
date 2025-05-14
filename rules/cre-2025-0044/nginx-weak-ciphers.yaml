@@ -23,6 +23,7 @@ rules:
         - configuration
         - tls
         - known-issue
+        - public
       mitigation: |
         - **Remove weak suites** from the `ssl_ciphers` directive (`ssl_ciphers HIGH:!aNULL:!MD5:!RC4:!3DES;`) or adopt a vetted baseline (Mozilla intermediate/modern).
         - **Enable TLS 1.2+** (`ssl_protocols TLSv1.2 TLSv1.3;`).

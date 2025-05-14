@@ -18,6 +18,7 @@ rules:
       - observability
       - telemetry
       - known-issue
+      - public
     mitigation: |
       - Enable `retry_on_failure` in the relevant exporter config to allow retry logic.
       - Reduce batch size via `sending_queue` settings or exporter-specific `timeout`/`flush_interval` configurations.

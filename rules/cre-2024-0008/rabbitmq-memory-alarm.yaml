@@ -24,6 +24,7 @@ rules:
       tags: 
         - known-problem
         - rabbitmq
+        - public
       mitigation: |
         - Inspect memory usage to identify queues or processes consuming RAM: 
              `rabbitmq-diagnostics memory_breakdown -n <node>`  

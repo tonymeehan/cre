@@ -15,6 +15,7 @@ rules:
       tags:
         - kafka
         - known-problem
+        - public
       mitigation: |
         - Provide a stable or redundant upstream configuration so NGINX can gracefully handle DNS resolution failures.
       mitigationScore: 5

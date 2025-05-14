@@ -18,6 +18,7 @@ rules:
       - configuration
       - security
       - known-issue
+      - public
     mitigation: |
       - Set `plugins.allow_unsigned_plugins = ["kentik-description-panel"]` in `grafana.ini` to explicitly allow the plugin.
       - Request a signed version from the plugin vendor or author.

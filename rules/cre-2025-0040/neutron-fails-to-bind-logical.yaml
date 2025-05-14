@@ -16,8 +16,8 @@ rules:
       - load-balancer
       - logical-switch
       - ovsdb
-      - rownotfound
       - known-issue
+      - public
     mitigation: |
       - Apply upstream Neutron fix (see Launchpad bug 1963921).
       - Patch Neutron to include retry logic for logical switch to load balancer associations.

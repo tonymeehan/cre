@@ -20,6 +20,7 @@ rules:
       - network
       - telemetry
       - known-issue
+      - public
     mitigation: |
       - Ensure `retry_on_failure` is enabled for all exporters.
       - Tune `timeout` and `sending_queue` settings to absorb temporary backend disruptions.

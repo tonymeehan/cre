@@ -20,6 +20,7 @@ rules:
       - context
       - attributeerror
       - known-issue
+      - public
     mitigation: |
       - Avoid sharing Redis clients across processes or async task groups.
       - Recreate clients inside subprocesses or use context-aware pools.

@@ -24,6 +24,7 @@ rules:
         payloads.
     tags:
       - nats
+      - public
     mitigation: |
       - **Enforce tighter limits**: set `max_payload` to a value ≤ 8 MB (or
          lower) in `nats-server.conf`; smaller limits force clients to chunk or

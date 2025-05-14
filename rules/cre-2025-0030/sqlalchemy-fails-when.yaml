@@ -17,6 +17,7 @@ rules:
       - escaping
       - connection
       - known-issue
+      - public
     mitigation: |
       - URL-encode special characters in usernames and passwords when constructing the connection string.
       - For example, replace `@` with `%40`, `:` with `%3A`, `/` with `%2F`, etc.

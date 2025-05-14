@@ -16,6 +16,7 @@ rules:
     - memory
     - infrastructure
     - known-issue
+    - public
     mitigation: |
       - Increase the memory limit allocated to your Memcached deployment.
       - Use Memcached eviction policies (e.g., LRU) or tune object size limits.

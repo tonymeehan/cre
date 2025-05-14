@@ -16,6 +16,7 @@ rules:
       - grafana
       - alloy
       - loki
+      - public
     mitigation: |
       Modify the following configuration parameters in Grafana:
 

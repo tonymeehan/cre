@@ -13,6 +13,7 @@ rules:
       - grafana
       - alloy
       - loki
+      - public
     mitigation: |
       - Upgrade to the latest version of Grafana alloy.
     references: 

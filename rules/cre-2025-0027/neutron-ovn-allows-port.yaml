@@ -12,12 +12,11 @@ rules:
     tags:
       - neutron
       - ovn
-      - port-binding
-      - vif
       - timeout
       - networking
       - openstack
       - known-issue
+      - public
     mitigation: |
       - Upgrade Neutron to a version that includes the fix for this issue:
         - Master branch: commit `8a55f091925fd5e6742fb92783c524450843f5a0`\n  

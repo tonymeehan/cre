@@ -18,6 +18,7 @@ rules:
       - instrumentation
       - opentelemetry
       - known-issue
+      - public
     mitigation: |
       - Ensure all PostgreSQL connections are created after any forks (e.g., inside a worker thread or process).
       - Avoid sharing DB connections across threads or subprocesses.

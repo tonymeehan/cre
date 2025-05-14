@@ -16,6 +16,7 @@ rules:
       - nats
       - security
       - authorization
+      - public
     mitigation: |
       - **Verify credentials** – confirm the `.creds`, NKey, or JWT files in
          the client deployment are correct.

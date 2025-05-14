@@ -17,6 +17,7 @@ rules:
       - environment
       - telemetry
       - known-issue
+      - public
     mitigation: |
       - Ensure that the `DD_API_KEY` environment variable is present and correctly populated in the container or deployment spec.
       - Use Kubernetes secrets or external secret stores to safely inject credentials into the runtime environment.

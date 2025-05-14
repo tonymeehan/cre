@@ -17,6 +17,7 @@ rules:
       - backpressure
       - data-loss
       - known-issue
+      - public
     mitigation: | 
       - Tune the memory_limiter configuration using `limit_mib` and `check_interval`.
       - Increase resource limits for the Collector container (e.g., via Kubernetes).

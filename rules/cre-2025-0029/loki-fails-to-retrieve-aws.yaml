@@ -17,6 +17,7 @@ rules:
       - storage
       - authentication
       - helm
+      - public
     mitigation: |
       - In your Helm chart values, explicitly set `accessKeyId` and `secretAccessKey` to `null` to prevent default values from interfering with IRSA authentication.
     references:

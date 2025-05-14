@@ -16,6 +16,7 @@ rules:
       - web
       - security
       - host-header
+      - public
     mitigation: |
       - Add the incoming domain, IP address, or wildcard pattern to `ALLOWED_HOSTS` in your Django settings. 
       - For example: 

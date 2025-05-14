@@ -16,6 +16,7 @@ rules:
       tags: 
         - known-problem
         - ovn
+        - public
       mitigation: |
         - Increase the OVN remote probe interval to 30 seconds:
           ```

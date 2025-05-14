@@ -19,6 +19,7 @@ rules:
       - attribute
       - nil-pointer
       - known-issue
+      - public
     mitigation: |
       - Upgrade to a release of `opentelemetry-collector-contrib` after v0.115.0 if available.
       - Patch your local copy of `createAttributes()` to check `value.Type()` before calling `.AsString()`.

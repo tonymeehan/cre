@@ -1,0 +1,47 @@
+rules:
+- cre:
+    id: CRE-2025-0068
+    severity: 3
+    title: Gnome input lag on Nvidia Ubuntu desktops 
+    category: ubuntu-desktop-problem
+    author: Daniel van Vugt
+    description: |
+      Keyboard input or the entire screen may freeze at times on systems using the Nvidia Xorg driver with GNOME.
+    cause: |
+      There is a bug in the mutter package that causes input lag on Nvidia Ubuntu desktops. This bug was fixed in https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/3685 (GNOME 46)
+    tags:
+      - gnome
+      - nvidia
+      - ubuntu
+    mitigation: |
+      This bug was fixed in the package mutter - 42.9-0ubuntu8
+      
+      ```
+      sudo add-apt-repository ppa:vanvugt/mutter
+      sudo apt update
+      sudo apt upgrade
+      ```
+
+      Then reboot.
+    references:
+      - https://bugs.launchpad.net/ubuntu/+source/mutter/+bug/2059847/comments/36
+      - https://askubuntu.com/questions/1509251/nvidia-drivers-cause-significant-lag-in-gnome-terminal
+      - https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/3685
+      - https://askubuntu.com/questions/1509058/input-delay-on-terminal-ubuntu-22-04-4
+    applications:
+      - name: ubuntu
+        version: ">= 22.04"
+    impact: |
+      - Input lag persists across gnome-terminal, gnome-console (kgx), and terminator.
+    impactScore: 6 
+    mitigationScore: 5
+  metadata:
+    kind: prequel
+    id: oB27UL2gQZShwDcyE44Xt6
+    gen: 1
+  rule:
+    set:
+      event:
+        source: cre.log.syslog
+      match:
+        - regex: "gnome-shell(.+)Can't update stage views actor(.+)is on because it needs an allocation."

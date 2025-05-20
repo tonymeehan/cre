@@ -1,0 +1,3 @@
+Apr 06 09:47:33 alphasite gnome-shell[2505]: Can't update stage views actor <unnamed>[<MetaWindowGroup>:0x5b2bd9670320] is on because it needs an allocation.
+Apr 06 09:47:33 alphasite gnome-shell[2505]: Can't update stage views actor <unnamed>[<MetaWindowActorX11>:0x5b2bdb6eb320] is on because it needs an allocation.
+Apr 06 09:47:33 alphasite gnome-shell[2505]: Can't update stage views actor <unnamed>[<MetaSurfaceActorX11>:0x5b2bdb6eea60] is on because it needs an allocation.

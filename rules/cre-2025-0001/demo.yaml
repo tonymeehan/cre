@@ -34,4 +34,4 @@ rules:
         match:
           - "method=GET path=/panic"
           - "panic: intentional panic inside goroutine for demo purposes"
-          - regex: "main.panicHandler(.+)demo.go:87"
+          - regex: "main.panicHandler(.+)demo.go"
